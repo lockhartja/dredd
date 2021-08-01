@@ -1,0 +1,117 @@
+<div class="usaa-vertical-navigation-wrapper">
+    <!-- Header -->
+    <div class="usaa-vertical-navigation-header">
+        <ng-content select="[usaaVerticalNavigationHeader]"></ng-content>
+    </div>
+
+    <!-- Content -->
+    <div
+        class="usaa-vertical-navigation-content"
+        usaaScrollbar
+        [usaaScrollbarOptions]="{ wheelPropagation: inner, suppressScrollX: true }"
+        #navigationContent
+    >
+        <!-- Content header -->
+        <div class="usaa-vertical-navigation-content-header">
+            <ng-content select="[usaaVerticalNavigationContentHeader]"></ng-content>
+        </div>
+
+        <!-- Items -->
+        <ng-container *ngFor="let item of navigation; trackBy: trackByFn">
+            <!-- Skip the hidden items -->
+            <ng-container *ngIf="(item.hidden && !item.hidden(item)) || !item.hidden">
+                <!-- Aside -->
+                <ng-container *ngIf="item.type === 'aside'">
+                    <usaa-vertical-navigation-aside-item
+                        [item]="item"
+                        [name]="name"
+                        [activeItemId]="activeAsideItemId || ''"
+                        [autoCollapse]="autoCollapse"
+                        [skipChildren]="true"
+                        (click)="toggleAside(item)"
+                    ></usaa-vertical-navigation-aside-item>
+                </ng-container>
+
+                <!-- Basic -->
+                <ng-container *ngIf="item.type === 'basic'">
+                    <usaa-vertical-navigation-basic-item
+                        [item]="item"
+                        [name]="name"
+                    ></usaa-vertical-navigation-basic-item>
+                </ng-container>
+
+                <!-- Collapsable -->
+                <ng-container *ngIf="item.type === 'collapsable'">
+                    <usaa-vertical-navigation-collapsable-item
+                        [item]="item"
+                        [name]="name"
+                        [autoCollapse]="autoCollapse"
+                    ></usaa-vertical-navigation-collapsable-item>
+                </ng-container>
+
+                <!-- Divider -->
+                <ng-container *ngIf="item.type === 'divider'">
+                    <usaa-vertical-navigation-divider-item
+                        [item]="item"
+                        [name]="name"
+                    ></usaa-vertical-navigation-divider-item>
+                </ng-container>
+
+                <!-- Group -->
+                <ng-container *ngIf="item.type === 'group'">
+                    <usaa-vertical-navigation-group-item
+                        [item]="item"
+                        [name]="name"
+                        [autoCollapse]="autoCollapse"
+                    ></usaa-vertical-navigation-group-item>
+                </ng-container>
+
+                <!-- Spacer -->
+                <ng-container *ngIf="item.type === 'spacer'">
+                    <usaa-vertical-navigation-spacer-item
+                        [item]="item"
+                        [name]="name"
+                    ></usaa-vertical-navigation-spacer-item>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+
+        <!-- Content footer -->
+        <div class="usaa-vertical-navigation-content-footer">
+            <ng-content select="[usaaVerticalNavigationContentFooter]"></ng-content>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="usaa-vertical-navigation-footer">
+        <ng-content select="[usaaVerticalNavigationFooter]"></ng-content>
+    </div>
+</div>
+
+<!-- Aside -->
+<ng-container *ngIf="activeAsideItemId">
+    <div
+        class="usaa-vertical-navigation-aside-wrapper"
+        usaaScrollbar
+        [usaaScrollbarOptions]="{ wheelPropagation: false, suppressScrollX: true }"
+        [@fadeInLeft]="position === 'left'"
+        [@fadeInRight]="position === 'right'"
+        [@fadeOutLeft]="position === 'left'"
+        [@fadeOutRight]="position === 'right'"
+    >
+        <!-- Items -->
+        <ng-container *ngFor="let item of navigation; trackBy: trackByFn">
+            <!-- Skip the hidden items -->
+            <ng-container *ngIf="(item.hidden && !item.hidden(item)) || !item.hidden">
+                <!-- Aside -->
+                <ng-container *ngIf="item.type === 'aside' && item.id === activeAsideItemId">
+                    <usaa-vertical-navigation-aside-item
+                        [item]="item"
+                        [name]="name"
+                        [autoCollapse]="autoCollapse"
+                    ></usaa-vertical-navigation-aside-item>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+    </div>
+</ng-container>

@@ -1,0 +1,592 @@
+/* Variables */
+$usaa-vertical-navigation-width: 280;
+
+usaa-vertical-navigation {
+    position: sticky;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    top: 0;
+    width: #{$usaa-vertical-navigation-width}px;
+    min-width: #{$usaa-vertical-navigation-width}px;
+    max-width: #{$usaa-vertical-navigation-width}px;
+    height: 100vh;
+    min-height: 100vh;
+    max-height: 100vh;
+    z-index: 200;
+
+    /* ----------------------------------------------------------------------------------------------------- */
+    /* @ Navigation Drawer
+    /* ----------------------------------------------------------------------------------------------------- */
+
+    /* Animations */
+    &.usaa-vertical-navigation-animations-enabled {
+        transition-duration: 400ms;
+        transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+        transition-property: visibility, margin-left, margin-right, transform, width, max-width, min-width;
+
+        /* Wrapper */
+        .usaa-vertical-navigation-wrapper {
+            transition-duration: 400ms;
+            transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+            transition-property: width, max-width, min-width;
+        }
+    }
+
+    /* Over mode */
+    &.usaa-vertical-navigation-mode-over {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+    }
+
+    /* Left position */
+    &.usaa-vertical-navigation-position-left {
+
+        /* Side mode */
+        &.usaa-vertical-navigation-mode-side {
+            margin-left: -#{$usaa-vertical-navigation-width}px;
+
+            &.usaa-vertical-navigation-opened {
+                margin-left: 0;
+            }
+        }
+
+        /* Over mode */
+        &.usaa-vertical-navigation-mode-over {
+            left: 0;
+            transform: translate3d(-100%, 0, 0);
+
+            &.usaa-vertical-navigation-opened {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        /* Wrapper */
+        .usaa-vertical-navigation-wrapper {
+            left: 0;
+        }
+    }
+
+    /* Right position */
+    &.usaa-vertical-navigation-position-right {
+
+        /* Side mode */
+        &.usaa-vertical-navigation-mode-side {
+            margin-right: -#{$usaa-vertical-navigation-width}px;
+
+            &.usaa-vertical-navigation-opened {
+                margin-right: 0;
+            }
+        }
+
+        /* Over mode */
+        &.usaa-vertical-navigation-mode-over {
+            right: 0;
+            transform: translate3d(100%, 0, 0);
+
+            &.usaa-vertical-navigation-opened {
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        /* Wrapper */
+        .usaa-vertical-navigation-wrapper {
+            right: 0;
+        }
+    }
+
+    /* Inner mode */
+    &.usaa-vertical-navigation-inner {
+        position: relative;
+        width: auto;
+        min-width: 0;
+        max-width: none;
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        box-shadow: none;
+
+        .usaa-vertical-navigation-wrapper {
+            position: relative;
+            overflow: visible;
+            height: auto;
+
+            .usaa-vertical-navigation-content {
+                overflow: visible !important;
+            }
+        }
+    }
+
+    /* Wrapper */
+    .usaa-vertical-navigation-wrapper {
+        position: absolute;
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 10;
+        background: inherit;
+        box-shadow: inset -1px 0 0 var(--usaa-border);
+
+        /* Header */
+        .usaa-vertical-navigation-header {
+
+        }
+
+        /* Content */
+        .usaa-vertical-navigation-content {
+            flex: 1 1 auto;
+            overflow-x: hidden;
+            overflow-y: auto;
+            overscroll-behavior: contain;
+
+            /* Divider */
+            >Usaa-vertical-navigation-divider-item {
+                margin: 24px 0;
+            }
+
+            /* Group */
+            >Usaa-vertical-navigation-group-item {
+                margin-top: 24px;
+            }
+        }
+
+        /* Footer */
+        .usaa-vertical-navigation-footer {
+
+        }
+    }
+
+    /* Aside wrapper */
+    .usaa-vertical-navigation-aside-wrapper {
+        position: absolute;
+        display: flex;
+        flex: 1 1 auto;
+        flex-direction: column;
+        top: 0;
+        bottom: 0;
+        left: #{$usaa-vertical-navigation-width}px;
+        width: #{$usaa-vertical-navigation-width}px;
+        height: 100%;
+        z-index: 5;
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        transition-duration: 400ms;
+        transition-property: left, right;
+        transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+        background: inherit;
+
+        >usaa-vertical-navigation-aside-item {
+            padding: 24px 0;
+
+            /* First item of the aside */
+            > .usaa-vertical-navigation-item-wrapper {
+                display: none !important;
+            }
+        }
+    }
+
+    &.usaa-vertical-navigation-position-right {
+
+        .usaa-vertical-navigation-aside-wrapper {
+            left: auto;
+            right: #{$usaa-vertical-navigation-width}px;
+        }
+    }
+
+    /* ----------------------------------------------------------------------------------------------------- */
+    /* @ Navigation Items
+    /* ----------------------------------------------------------------------------------------------------- */
+
+    /* Navigation items common */
+   usaa-vertical-navigation-aside-item,
+   usaa-vertical-navigation-basic-item,
+   usaa-vertical-navigation-collapsable-item,
+   usaa-vertical-navigation-divider-item,
+   usaa-vertical-navigation-group-item,
+   usaa-vertical-navigation-spacer-item {
+        display: flex;
+        flex-direction: column;
+        flex: 1 0 auto;
+        user-select: none;
+
+        .usaa-vertical-navigation-item-wrapper {
+
+            .usaa-vertical-navigation-item {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 10px 16px;
+                font-size: 13px;
+                font-weight: 500;
+                line-height: 20px;
+                text-decoration: none;
+                border-radius: 6px;
+
+                /* Disabled state */
+                &.usaa-vertical-navigation-item-disabled {
+                    cursor: default;
+                    opacity: 0.4;
+                }
+
+                .usaa-vertical-navigation-item-icon {
+                    margin-right: 16px;
+                }
+
+                .usaa-vertical-navigation-item-title-wrapper {
+
+                    .usaa-vertical-navigation-item-subtitle {
+                        font-size: 11px;
+                        line-height: 1.5;
+                    }
+                }
+
+                .usaa-vertical-navigation-item-badge {
+                    margin-left: auto;
+
+                    .usaa-vertical-navigation-item-badge-content {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 10px;
+                        font-weight: 600;
+                        white-space: nowrap;
+                        height: 20px;
+                    }
+                }
+            }
+        }
+    }
+
+    /* Aside, Basic, Collapsable, Group */
+   usaa-vertical-navigation-aside-item,
+   usaa-vertical-navigation-basic-item,
+   usaa-vertical-navigation-collapsable-item,
+   usaa-vertical-navigation-group-item {
+
+        > .usaa-vertical-navigation-item-wrapper {
+            margin: 0 12px;
+        }
+    }
+
+    /* Aside, Basic, Collapsable */
+   usaa-vertical-navigation-aside-item,
+   usaa-vertical-navigation-basic-item,
+   usaa-vertical-navigation-collapsable-item {
+        margin-bottom: 4px;
+
+        .usaa-vertical-navigation-item {
+            cursor: pointer;
+        }
+    }
+
+    /* Aside */
+   usaa-vertical-navigation-aside-item {
+
+    }
+
+    /* Basic */
+   usaa-vertical-navigation-basic-item {
+
+    }
+
+    /* Collapsable */
+   usaa-vertical-navigation-collapsable-item {
+
+        > .usaa-vertical-navigation-item-wrapper {
+
+            .usaa-vertical-navigation-item {
+
+                .usaa-vertical-navigation-item-badge {
+
+                    + .usaa-vertical-navigation-item-arrow {
+                        margin-left: 8px;
+                    }
+                }
+
+                .usaa-vertical-navigation-item-arrow {
+                    height: 20px;
+                    line-height: 20px;
+                    margin-left: auto;
+                    transition: transform 300ms cubic-bezier(0.25, 0.8, 0.25, 1),
+                    color 375ms cubic-bezier(0.25, 0.8, 0.25, 1);
+                }
+            }
+        }
+
+        &.usaa-vertical-navigation-item-expanded {
+
+            > .usaa-vertical-navigation-item-wrapper {
+
+                .usaa-vertical-navigation-item {
+
+                    .usaa-vertical-navigation-item-arrow {
+                        transform: rotate(90deg);
+                    }
+                }
+            }
+        }
+
+        > .usaa-vertical-navigation-item-children {
+            margin-top: 6px;
+
+            > *:last-child {
+                padding-bottom: 6px;
+
+                > .usaa-vertical-navigation-item-children {
+
+                    > *:last-child {
+                        padding-bottom: 0;
+                    }
+                }
+            }
+
+            .usaa-vertical-navigation-item {
+                padding: 10px 16px;
+            }
+        }
+
+        /* 1st level */
+        .usaa-vertical-navigation-item-children {
+            overflow: hidden;
+
+            .usaa-vertical-navigation-item {
+                padding-left: 56px;
+            }
+
+            /* 2nd level */
+            .usaa-vertical-navigation-item-children {
+
+                .usaa-vertical-navigation-item {
+                    padding-left: 72px;
+                }
+
+                /* 3rd level */
+                .usaa-vertical-navigation-item-children {
+
+                    .usaa-vertical-navigation-item {
+                        padding-left: 88px;
+                    }
+
+                    /* 4th level */
+                    .usaa-vertical-navigation-item-children {
+
+                        .usaa-vertical-navigation-item {
+                            padding-left: 104px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /* Divider */
+   usaa-vertical-navigation-divider-item {
+        margin: 12px 0;
+
+        .usaa-vertical-navigation-item-wrapper {
+            height: 1px;
+            box-shadow: 0 1px 0 0;
+        }
+    }
+
+    /* Group */
+   usaa-vertical-navigation-group-item {
+
+        > .usaa-vertical-navigation-item-wrapper {
+
+            .usaa-vertical-navigation-item {
+
+                .usaa-vertical-navigation-item-badge,
+                .usaa-vertical-navigation-item-icon {
+                    display: none !important;
+                }
+
+                .usaa-vertical-navigation-item-title-wrapper {
+
+                    .usaa-vertical-navigation-item-title {
+                        font-size: 12px;
+                        font-weight: 600;
+                        letter-spacing: 0.05em;
+                        text-transform: uppercase;
+                    }
+                }
+            }
+        }
+    }
+
+    /* Spacer */
+   usaa-vertical-navigation-spacer-item {
+        margin: 6px 0;
+    }
+}
+
+/* ----------------------------------------------------------------------------------------------------- */
+/* @ Overlay
+/* ----------------------------------------------------------------------------------------------------- */
+.usaa-vertical-navigation-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 170;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+
+    + .usaa-vertical-navigation-aside-overlay {
+        background-color: transparent;
+    }
+}
+
+/* ----------------------------------------------------------------------------------------------------- */
+/* @ Aside overlay
+/* ----------------------------------------------------------------------------------------------------- */
+.usaa-vertical-navigation-aside-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 169;
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* ----------------------------------------------------------------------------------------------------- */
+/* @ Navigation Items Colors
+/* ----------------------------------------------------------------------------------------------------- */
+
+/* Navigation items common */
+usaa-vertical-navigation-aside-item,
+usaa-vertical-navigation-basic-item,
+usaa-vertical-navigation-collapsable-item,
+usaa-vertical-navigation-group-item {
+
+    .usaa-vertical-navigation-item-wrapper {
+
+        .usaa-vertical-navigation-item {
+            color: currentColor;
+
+            .usaa-vertical-navigation-item-icon {
+                @apply text-current opacity-60;
+            }
+
+            .usaa-vertical-navigation-item-title-wrapper {
+
+                .usaa-vertical-navigation-item-title {
+                    @apply text-current opacity-80;
+                }
+
+                .usaa-vertical-navigation-item-subtitle {
+                    @apply text-current opacity-50;
+                }
+            }
+        }
+    }
+}
+
+/* Aside, Basic, Collapsable */
+usaa-vertical-navigation-aside-item,
+usaa-vertical-navigation-basic-item,
+usaa-vertical-navigation-collapsable-item {
+
+    > .usaa-vertical-navigation-item-wrapper {
+
+        .usaa-vertical-navigation-item {
+
+            /* Active state */
+            &:not(.usaa-vertical-navigation-item-disabled) {
+
+                &.usaa-vertical-navigation-item-active,
+                &.usaa-vertical-navigation-item-active-forced {
+                    @apply bg-gray-800 bg-opacity-5 dark:bg-white dark:bg-opacity-12;
+
+                    .usaa-vertical-navigation-item-icon {
+                        @apply opacity-100;
+                    }
+
+                    .usaa-vertical-navigation-item-title {
+                        @apply opacity-100;
+                    }
+
+                    .usaa-vertical-navigation-item-subtitle {
+                        @apply opacity-100;
+                    }
+                }
+            }
+
+            /* Hover state */
+            &:not(.usaa-vertical-navigation-item-active-forced):not(.usaa-vertical-navigation-item-active):not(.usaa-vertical-navigation-item-disabled) {
+
+                &:hover {
+                    @apply bg-gray-800 bg-opacity-5 dark:bg-white dark:bg-opacity-12;
+
+                    .usaa-vertical-navigation-item-icon {
+                        @apply opacity-100;
+                    }
+
+                    .usaa-vertical-navigation-item-title,
+                    .usaa-vertical-navigation-item-arrow {
+                        @apply opacity-100;
+                    }
+
+                    .usaa-vertical-navigation-item-subtitle {
+                        @apply opacity-100;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Collapsable */
+usaa-vertical-navigation-collapsable-item {
+
+    /* Expanded state */
+    &.usaa-vertical-navigation-item-expanded {
+
+        > .usaa-vertical-navigation-item-wrapper {
+
+            .usaa-vertical-navigation-item {
+
+                .usaa-vertical-navigation-item-icon {
+                    @apply opacity-100;
+                }
+
+                .usaa-vertical-navigation-item-title,
+                .usaa-vertical-navigation-item-arrow {
+                    @apply opacity-100;
+                }
+
+                .usaa-vertical-navigation-item-subtitle {
+                    @apply opacity-100;
+                }
+            }
+        }
+    }
+}
+
+/* Group */
+usaa-vertical-navigation-group-item {
+
+    > .usaa-vertical-navigation-item-wrapper {
+
+        .usaa-vertical-navigation-item {
+
+            .usaa-vertical-navigation-item-title-wrapper {
+
+                .usaa-vertical-navigation-item-title {
+                    @apply opacity-100 text-primary-600 dark:text-primary-400;
+                }
+            }
+        }
+    }
+}

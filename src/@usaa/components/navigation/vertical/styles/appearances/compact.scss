@@ -1,0 +1,110 @@
+/* Variables */
+$usaa-vertical-navigation-compact-width: 112;
+
+usaa-vertical-navigation {
+
+    /* Compact appearance overrides */
+    &.usaa-vertical-navigation-appearance-compact {
+        width: #{$usaa-vertical-navigation-compact-width}px;
+        min-width: #{$usaa-vertical-navigation-compact-width}px;
+        max-width: #{$usaa-vertical-navigation-compact-width}px;
+
+        /* Left positioned */
+        &.usaa-vertical-navigation-position-left {
+
+            /* Side mode */
+            &.usaa-vertical-navigation-mode-side {
+                margin-left: -#{$usaa-vertical-navigation-compact-width}px;
+            }
+
+            /* Opened */
+            &.usaa-vertical-navigation-opened {
+                margin-left: 0;
+            }
+        }
+
+        /* Right positioned */
+        &.usaa-vertical-navigation-position-right {
+
+            /* Side mode */
+            &.usaa-vertical-navigation-mode-side {
+                margin-right: -#{$usaa-vertical-navigation-compact-width}px;
+            }
+
+            /* Opened */
+            &.usaa-vertical-navigation-opened {
+                margin-right: 0;
+            }
+
+            /* Aside wrapper */
+            .usaa-vertical-navigation-aside-wrapper {
+                left: auto;
+                right: #{$usaa-vertical-navigation-compact-width}px;
+            }
+        }
+
+        /* Wrapper */
+        .usaa-vertical-navigation-wrapper {
+
+            /* Content */
+            .usaa-vertical-navigation-content {
+
+                >usaa-vertical-navigation-aside-item,
+                >usaa-vertical-navigation-basic-item {
+
+                    .usaa-vertical-navigation-item-wrapper {
+                        margin: 4px 8px 0 8px;
+
+                        .usaa-vertical-navigation-item {
+                            flex-direction: column;
+                            justify-content: center;
+                            padding: 12px;
+                            border-radius: 6px;
+
+                            .usaa-vertical-navigation-item-icon {
+                                margin-right: 0;
+                            }
+
+                            .usaa-vertical-navigation-item-title-wrapper {
+                                margin-top: 8px;
+
+                                .usaa-vertical-navigation-item-title {
+                                    font-size: 12px;
+                                    font-weight: 500;
+                                    text-align: center;
+                                    line-height: 16px;
+                                }
+
+                                .usaa-vertical-navigation-item-subtitle {
+                                    display: none !important;
+                                }
+                            }
+
+                            .usaa-vertical-navigation-item-badge {
+                                position: absolute;
+                                top: 12px;
+                                left: 64px;
+                            }
+                        }
+                    }
+
+                    >usaa-vertical-navigation-collapsable-item {
+                        display: none
+                    }
+
+                    >usaa-vertical-navigation-group-item {
+
+                        > .usaa-vertical-navigation-item-wrapper {
+                            display: none
+                        }
+                    }
+                }
+            }
+        }
+
+        /* Aside wrapper */
+        .usaa-vertical-navigation-aside-wrapper {
+            left: #{$usaa-vertical-navigation-compact-width}px;
+        }
+    }
+}
